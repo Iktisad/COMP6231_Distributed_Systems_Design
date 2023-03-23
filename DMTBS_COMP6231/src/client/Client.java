@@ -5,20 +5,19 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.Arrays;
-import java.util.Iterator;
+//import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
-import org.json.JSONArray;
+//import org.json.JSONArray;
 import org.json.JSONObject;
 
 import server.AuthServerInterface;
-import server.atwater.AdminAtwaterInterface;
-import server.atwater.CustomerAtwaterInterface;
-import server.outremont.AdminOutremontInterface;
-import server.outremont.CustomerOutremontInterface;
-import server.verdun.AdminVerdunInterface;
-import server.verdun.CustomerVerdunInterface;
+//import server.atwater.AdminInterface;
+//import server.atwater.CustomerInterface;
+//import server.outremont.AdminInterface;
+import server.verdun.AdminInterface;
+import server.verdun.CustomerInterface;
 
 
 public class Client {
@@ -123,7 +122,7 @@ public class Client {
 				
 				switch (area) {
 				case 1:
-					CustomerAtwaterInterface atwc = (CustomerAtwaterInterface)Naming.lookup("rmi://localhost:5001" + "/Atwater/customer");
+					server.atwater.CustomerInterface atwc = (server.atwater.CustomerInterface)Naming.lookup("rmi://localhost:5001" + "/Atwater/customer");
 					String server = "Atwater";
 					byte atwcInput;
 					while(true) {
@@ -179,7 +178,7 @@ public class Client {
 					break;
 				case 2:
 					String serverOut = "Outremont";
-					CustomerOutremontInterface outc = (CustomerOutremontInterface)Naming.lookup("rmi://localhost:5002" + "/Outremont/customer");
+					server.outremont.CustomerInterface outc = (server.outremont.CustomerInterface)Naming.lookup("rmi://localhost:5002" + "/Outremont/customer");
 					byte outcInput;
 					while(true) {
 
@@ -234,7 +233,7 @@ public class Client {
 					break;
 				case 3:
 					String serverVer = "Verdun";
-					CustomerVerdunInterface verc = (CustomerVerdunInterface)Naming.lookup("rmi://localhost:5003" + "/Verdun/customer");
+					CustomerInterface verc = (CustomerInterface)Naming.lookup("rmi://localhost:5003" + "/Verdun/customer");
 					byte vercInput;
 					while(true) {
 
@@ -300,7 +299,7 @@ public class Client {
 				
 				switch (area) {
 				case 1:
-					AdminAtwaterInterface admin = (AdminAtwaterInterface)Naming.lookup("rmi://localhost:5001" + "/Atwater/admin");
+					server.atwater.AdminInterface admin = (server.atwater.AdminInterface)Naming.lookup("rmi://localhost:5001" + "/Atwater/admin");
 					String server = "Atwater";
 					byte adminInput;
 					while(true) {
@@ -389,7 +388,7 @@ public class Client {
 					
 					break;
 				case 2:
-					AdminOutremontInterface adminOut = (AdminOutremontInterface)Naming.lookup("rmi://localhost:5002" + "/Outremont/admin");
+					server.outremont.AdminInterface adminOut = (server.outremont.AdminInterface)Naming.lookup("rmi://localhost:5002" + "/Outremont/admin");
 					String serverOut = "Outremont";
 					byte adminOutInput;
 					while(true) {
@@ -478,7 +477,7 @@ public class Client {
 					break;
 				case 3:
 					String serverVer = "Verdun";
-					AdminVerdunInterface adminVer = (AdminVerdunInterface)Naming.lookup("rmi://localhost:5003" + "/Verdun/admin");
+					AdminInterface adminVer = (AdminInterface)Naming.lookup("rmi://localhost:5003" + "/Verdun/admin");
 					byte adminVerInput;
 					while(true) {
 						
@@ -567,8 +566,7 @@ public class Client {
 					break;
 				}				
 				
-			}		
-			
+			}			
 			sc.close();
 		}catch(MalformedURLException | RemoteException | NotBoundException e) {
 			e.printStackTrace();
